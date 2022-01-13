@@ -88,12 +88,12 @@ class Comment(db.Model):
     author_comment = relationship("User", back_populates="comment")
     blog_post_comment = relationship("BlogPost", back_populates="comments")
 
-# db.create_all()
+db.create_all()
 
 
 @app.route('/')
 def get_all_posts():
-    posts = BlogPost.query.all()
+    posts = db.session.query(BlogPost).all()
     return render_template("index.html", all_posts=posts, current_user=current_user)
 
 
